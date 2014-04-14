@@ -1,29 +1,22 @@
-$ ->
-
-  $.fn.datahref = (options) ->
-  
+$.fn.extend
+  datahref: (options) ->
     settings = $.extend
-      pointer: true,
+      pointer: true
       target: '_self'
-    , options
     
-    this.find('*[data-href]').each ->
+    settings = $.extend settings, options
+
+    return @find('*[data-href]').each ->
       inAttributeSettings = {}
-      
-      if settings.pointer
-        $(this).css 'cursor', 'pointer'
-        target = settings.target
-        
-        if ($this).data 'href-settings'
-          inAttributeSettings = $(this).data 'href-settings'
-          
-          if inAttributeSettings.hasOwnProperty 'target'
-            target = inAttributeSettings.target
+
+      $(this).css 'cursor', 'pointer' if settings.pointer
+
+      target = settings.target
             
-          if inAttributeSettings.hasOwnProperty 'pointer'
-            $(this).css 'cursor', 'pointer'
-            
+      if $(this).data 'href-settings'
+        inAttributeSettings = $(this).data 'href-settings' 
+        target = inAttributeSettings.target if inAttributeSettings.hasOwnProperty 'target'
+        $(this).css 'cursor', 'pointer' if inAttributeSettings.hasOwnProperty 'pointer'
+
       $(this).on 'click', ->
-        window.open($(this).data 'href', target)
-        
-    return this
+        window.open($(this).data('href'), target)
