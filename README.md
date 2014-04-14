@@ -1,3 +1,3 @@
 Snippets
 ==========
-This is my private library of most useful CSS (LESS) and JavaScript snippets. It's actually not CSS and JavaScript, because all CSS is written in LESS and all JavaScript is written in CoffeeScript. All snippets are absolutely free to use, so don't hesitate to use them on personal or commercial projects. If you find some of the codes kind of buggy or if you thing there is missing something, please let me know jakub.kotula@gmail.com.
+This is my private (well, maybe public) library of most useful CSS and JavaScript snippets. It's actually not CSS and JavaScript, because all CSS is written in LESS and all JavaScript is written in CoffeeScript. All snippets are absolutely free to use, so don't hesitate to use them on personal or even on commercial projects. If you find some of the codes kind of buggy or if you think there is missing something, please let me know: jakub.kotula@gmail.com.
