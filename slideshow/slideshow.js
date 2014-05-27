@@ -21,7 +21,6 @@
       this.next = settings.next || $('<a class="next" href="#" />');
       this.lift = settings.lift || ($('.slideshow-wrapper .slideshow-lift'));
       this.paging = settings.paging || ($('<div class="paging" />')).appendTo(this.root);
-      console.log(this.root);
       (this.prev.appendTo(this.root)).click(function(e) {
         e.preventDefault();
         return _this.slideMe('prev');
@@ -90,7 +89,7 @@
 
   $('document').ready(function() {
     var doSlideshow;
-    return doSlideshow = new Slideshow({});
+    return doSlideshow = new Slideshow();
   });
 
 }).call(this);

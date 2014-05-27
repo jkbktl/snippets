@@ -18,8 +18,6 @@ class Slideshow
     @lift = settings.lift or ($ '.slideshow-wrapper .slideshow-lift')
     @paging = settings.paging or ($ '<div class="paging" />').appendTo @root
 
-    console.log @root
-
     (@prev.appendTo @root).click (e) =>
       e.preventDefault()
       @slideMe 'prev'
@@ -68,5 +66,4 @@ class Slideshow
 
 
 $('document').ready ->
-  doSlideshow = new Slideshow({
-  })
+  doSlideshow = new Slideshow()
