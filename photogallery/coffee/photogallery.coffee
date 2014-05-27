@@ -5,17 +5,18 @@ class Photogallery
     @nextButton()
     @prevButton()
     @windowResize()
+    $(document).on('keyup.keyboard', $.proxy(@_keyboardAction, @));
 
   showGallery: ->
     $('#photogalleryWrapper').on 'click', '.photoLink', (e) ->
       e.preventDefault()
       showImage = $(this).addClass('currentImage').attr('href')
-      console.log("Testovací test #{showImage} add hoc test")
       $("<div class='overlay'>
         <a href='#' class='overlay-close'></a>
         <a href='#' class='overlay-prev'></a>
         <a href='#' class='overlay-next'></a>
         <img id='mainImage' src='#{showImage}' /></div>").appendTo('body')
+      Photogallery.prototype._imageResize()
 
   closeButton: ->
     $('body').on 'click', '.overlay-close', (e) =>
@@ -35,6 +36,8 @@ class Photogallery
   windowResize: ->
     $(window).resize =>
       @_imageResize()
+
+
 
   _imageResize: ->
     maxHeight = $(window).height()
@@ -64,6 +67,21 @@ class Photogallery
     prevImage = $('.currentImage').siblings().last() if prevImage is false
     console.log prevImage
     $('#mainImage').attr('src', prevImage.attr 'href' )
+
+  _keyboardAction: (event) ->
+    KEYCODE_ESC        = 27
+    KEYCODE_LEFTARROW  = 37
+    KEYCODE_RIGHTARROW = 39
+
+    keycode = event.keyCode;
+    key     = String.fromCharCode(keycode).toLowerCase()
+    if keycode == KEYCODE_ESC or key.match(/x|o|c/)
+      @_closeGallery()
+    else if key == 'p' or keycode == KEYCODE_LEFTARROW
+      @_prevImage()
+    else if key == 'n' or keycode == KEYCODE_RIGHTARROW
+      @_nextImage()
+
 
 $ ->
   photogallery = new Photogallery()

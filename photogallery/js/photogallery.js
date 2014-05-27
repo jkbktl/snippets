@@ -8,6 +8,7 @@
       this.nextButton();
       this.prevButton();
       this.windowResize();
+      $(document).on('keyup.keyboard', $.proxy(this._keyboardAction, this));
     }
 
     Photogallery.prototype.showGallery = function() {
@@ -15,8 +16,8 @@
         var showImage;
         e.preventDefault();
         showImage = $(this).addClass('currentImage').attr('href');
-        console.log("Testovací test " + showImage + " add hoc test");
-        return $("<div class='overlay'>        <a href='#' class='overlay-close'></a>        <a href='#' class='overlay-prev'></a>        <a href='#' class='overlay-next'></a>        <img id='mainImage' src='" + showImage + "' /></div>").appendTo('body');
+        $("<div class='overlay'>        <a href='#' class='overlay-close'></a>        <a href='#' class='overlay-prev'></a>        <a href='#' class='overlay-next'></a>        <img id='mainImage' src='" + showImage + "' /></div>").appendTo('body');
+        return Photogallery.prototype._imageResize();
       });
     };
 
@@ -82,6 +83,22 @@
       }
       console.log(prevImage);
       return $('#mainImage').attr('src', prevImage.attr('href'));
+    };
+
+    Photogallery.prototype._keyboardAction = function(event) {
+      var KEYCODE_ESC, KEYCODE_LEFTARROW, KEYCODE_RIGHTARROW, key, keycode;
+      KEYCODE_ESC = 27;
+      KEYCODE_LEFTARROW = 37;
+      KEYCODE_RIGHTARROW = 39;
+      keycode = event.keyCode;
+      key = String.fromCharCode(keycode).toLowerCase();
+      if (keycode === KEYCODE_ESC || key.match(/x|o|c/)) {
+        return this._closeGallery();
+      } else if (key === 'p' || keycode === KEYCODE_LEFTARROW) {
+        return this._prevImage();
+      } else if (key === 'n' || keycode === KEYCODE_RIGHTARROW) {
+        return this._nextImage();
+      }
     };
 
     return Photogallery;
